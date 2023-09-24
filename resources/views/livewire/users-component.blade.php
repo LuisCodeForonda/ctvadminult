@@ -1,7 +1,7 @@
 <div>
     {{-- Do your work, then step back. --}}
     <div class="relative overflow-x-auto">
-        <div class="flex flex-row gap-4 items-center px-2">
+        <div class="flex flex-row gap-4 items-center p-2">
             <input type="text" wire:model.live="search"
                 class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96
                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -14,8 +14,7 @@
                 <option value="25">50</option>
             </select>
             <div class="grow"></div>
-            <button type="button"
-                wire:click.prevent="crear()" class=" text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nuevo</button>
+            <x-primary-button wire:click.prevent="crear()">{{ __('Nuevo')}}</x-primary-button>
             @if ($modal)
                 @include('forms.user-form')
             @endif
@@ -58,8 +57,7 @@
                             </td>
                             
                             <td class="px-6 py-4">
-                                <button type="button" wire:click="delete({{ $item->id }})" class="focus:outline-none text-red-600 hover:text-red-700 font-bold">Eliminar</button>
-                                
+                                <button type="button" wire:click="deleteId({{ $item->id }})" class="focus:outline-none text-red-600 hover:text-red-700 hover: font-bold">Eliminar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -72,5 +70,7 @@
             {{ $data->links() }}
         </div>
     </div>
-
+    @if ($modal_confirmation)
+        @include('components.modal-confirmation')
+    @endif
 </div>

@@ -24,6 +24,7 @@ class UsersComponent extends Component
     public $paginado = 5;
     public $search = '';
     public $modal = false;
+    public $modal_confirmation = false;
 
     public function crear()
     {
@@ -67,9 +68,19 @@ class UsersComponent extends Component
         $user->update(['status' => $user->status == 1 ? 0 : 1]);
     }
 
-    public function delete($id)
+    public function deleteId($id)
     {
-        User::findOrFail($id)->delete();
+        $this->id = $id;
+        $this->modal_confirmation = true; //mostramos el modal de confirmacion
+    }
+
+    public function delete(){
+        User::find($this->id)->delete();
+        $this->modal_confirmation = false; //cerramos el modal
+    }
+
+    public function closeModalConfimation(){
+        $this->modal_confirmation = false;
     }
 
     public function limpiar()
