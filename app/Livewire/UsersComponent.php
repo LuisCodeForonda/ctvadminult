@@ -81,6 +81,7 @@ class UsersComponent extends Component
 
     public function closeModalConfimation(){
         $this->modal_confirmation = false;
+        $this->id = '';
     }
 
     public function limpiar()
