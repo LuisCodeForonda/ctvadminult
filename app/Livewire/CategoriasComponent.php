@@ -2,26 +2,21 @@
 
 namespace App\Livewire;
 
-use App\Models\Programacion;
+use Illuminate\Support\Str;
+use App\Models\Categoria;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
 
-class ProgramacionsComponent extends Component
+class CategoriasComponent extends Component
 {
-
     use WithPagination;
 
-    public $id = '';
-
+    public $id;
     #[Rule('required|max:50')]
-    public $titulo = '';
-
-    #[Rule('required')]
-    public $hora = '';
-
-    #[Rule('required')]
-    public $horario = 'A';
+    public $titulo;
+    
+    public $slug;
 
     public $paginado = 5;
     public $search = '';
@@ -41,11 +36,12 @@ class ProgramacionsComponent extends Component
     public function store(){
         $this->validate();
 
-        Programacion::updateOrCreate(['id'=> $this->id],
+        
+
+        Categoria::updateOrCreate(['id'=> $this->id],
         [
             'titulo' => $this->titulo,
-            'hora' => $this->hora,
-            'horario' => $this->horario,
+            'slug' => Str::slug($this->titulo),
         ]);
 
         $this->modal = false;
@@ -53,11 +49,9 @@ class ProgramacionsComponent extends Component
     }
 
     public function edit($id){
-        $programacion = Programacion::findOrFail($id);
-        $this->id = $programacion->id;
-        $this->titulo = $programacion->titulo;
-        $this->hora = $programacion->hora;
-        $this->horario = $programacion->horario;
+        $categoria = Categoria::findOrFail($id);
+        $this->id = $categoria->id;
+        $this->titulo = $categoria->titulo;
 
         $this->modal = true;
     }
@@ -68,7 +62,7 @@ class ProgramacionsComponent extends Component
     }
 
     public function delete(){
-        Programacion::find($this->id)->delete();
+        Categoria::find($this->id)->delete();
         $this->modal_confirmation = false; //cerramos el modal
         $this->id = '';
     }
@@ -81,8 +75,7 @@ class ProgramacionsComponent extends Component
     public function limpiar(){
         $this->id = '';
         $this->titulo = '';
-        $this->hora = '';
-        $this->horario = 'A';
+        $this->slug = '';
     }
 
     public function updatingSearch(){
@@ -91,6 +84,6 @@ class ProgramacionsComponent extends Component
 
     public function render()
     {
-        return view('livewire.programacions-component', ['data' => \App\Models\Programacion::where('titulo', 'LIKE', '%'.$this->search.'%')->paginate($this->paginado)]);
+        return view('livewire.categorias-component', ['data' => \App\Models\Categoria::where('titulo', 'LIKE', '%'.$this->search.'%')->paginate($this->paginado)]);
     }
 }

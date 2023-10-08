@@ -12,15 +12,34 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    @can('dashboard')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('users')
+                        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('permisos')
+                        <x-nav-link :href="route('permisos')" :active="request()->routeIs('permisos')">
+                            {{ __('Permisos') }}
+                        </x-nav-link>
+                    @endcan
+                    @can('programacion')
+                        <x-nav-link :href="route('programacion')" :active="request()->routeIs('programacion')">
+                            {{ __('Programacion') }}
+                        </x-nav-link>
+                    @endcan
+                   
+                    <x-nav-link :href="route('categorias')" :active="request()->routeIs('categorias')">
+                        {{ __('Categorias') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
-                        {{ __('Users') }}
+                    <x-nav-link :href="route('noticias')" :active="request()->routeIs('noticias')">
+                        {{ __('Noticias') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('programacion')" :active="request()->routeIs('programacion')">
-                        {{ __('Programacion') }}
-                    </x-nav-link>
+                    
                 </div>
             </div>
 

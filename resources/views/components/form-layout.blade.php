@@ -1,4 +1,4 @@
-<div class="fixed top-0 left-0 z-10 w-full h-screen p-4 overflow-hidden md:inset-0 bg-gray-600/50 flex justify-center items-center"">
+<div class="fixed top-0 left-0 z-10 w-full h-screen p-4 overflow-y-scroll md:inset-0 bg-gray-600/50 flex justify-center items-center"">
     <!-- If you do not have a consistent goal in life, you can not live it in a consistent way. - Marcus Aurelius -->
 
     <div class="relative w-full max-w-2xl max-h-full">

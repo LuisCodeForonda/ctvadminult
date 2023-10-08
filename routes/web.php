@@ -28,8 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::view('/users', 'users')->name('users');
-    Route::view('/programacion', 'programacion')->name('programacion');
+    Route::view('/users', 'users')->middleware('can:users')->name('users');
+    Route::view('/permisos', 'permisos')->middleware('can:permisos')->name('permisos');
+    Route::view('/programacion', 'programacion')->middleware('can:programacion')->name('programacion');
+    Route::view('/categorias', 'categorias')->name('categorias');
+    Route::view('/noticias', 'noticias')->name('noticias');
 });
 
 require __DIR__.'/auth.php';

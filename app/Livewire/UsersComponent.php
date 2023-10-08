@@ -94,8 +94,12 @@ class UsersComponent extends Component
         $this->password_confirmation = '';
     }
 
+    public function updatingSearch(){
+        $this->resetPage(); //resetear el paginado en base a la variable search
+    }
+
     public function render()
     {
-        return view('livewire.users-component', ['data' => \App\Models\User::where('name', 'LIKE', '%'.$this->search.'%')->paginate($this->paginado)]);
+        return view('livewire.users-component', ['data' => \App\Models\User::where('name', 'LIKE', '%'.$this->search.'%')->orWhere('email', 'LIKE', '%'.$this->search.'%')->paginate($this->paginado)]);
     }
 }

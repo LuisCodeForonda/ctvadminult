@@ -1,5 +1,5 @@
 <div>
-    {{-- Do your work, then step back. --}}
+    {{-- Because she competes with no one, no one can compete with her. --}}
     <div class="relative overflow-x-auto">
         <div class="flex flex-row gap-4 items-center p-2">
             <input type="text" wire:model.live="search"
@@ -14,24 +14,20 @@
                 <option value="50">50</option>
             </select>
             <div class="grow"></div>
-            <x-primary-button wire:click.prevent="crear()">{{ __('Nuevo')}}</x-primary-button>
+            <x-primary-button wire:click.prevent="new()">{{ __('Nuevo')}}</x-primary-button>
             @if ($modal)
-                @include('forms.user-form')
+                @include('forms.categorias-form', ['title' => 'Formulario de categorias', 'id' => $id])
             @endif
-            
         </div>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 my-2">
             @if (count($data) >= 1)
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            Titulo
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Email
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Habilitado
+                            Slug
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Acciones
@@ -43,20 +39,13 @@
                         <tr wire:key="{{ $item->id }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->name }}
+                                {{ $item->titulo }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $item->email }}
+                                {{ $item->slug }}
                             </td>
-                            <td class="px-6">
-                                @if ($item->status == 1)
-                                    <button type="submit" wire:click="change({{ $item->id }})"><img src="{{ asset('icons/bxs-check-circle.svg')}}" alt=""></button>
-                                @else
-                                    <button type="submit" wire:click="change({{ $item->id }})"><img src="{{ asset('icons/bxs-x-circle.svg')}}" alt=""></button>
-                                @endif
-                            </td>
-                            
                             <td class="px-6 py-4">
+                                <button type="button" wire:click="edit({{ $item->id }})" class="focus:outline-none font-bold text-blue-600 mr-2 hover:text-blue-700 hover:underline hover:underline-offset-2">Editar</button>
                                 <button type="button" wire:click="deleteId({{ $item->id }})" class="focus:outline-none font-bold text-red-600 hover:text-red-700 hover:underline hover:underline-offset-2">Eliminar</button>
                             </td>
                         </tr>
