@@ -19,7 +19,7 @@ class ProgramacionFactory extends Factory
         return [
             //
             'titulo' => fake()->text(25),
-            'hora' => fake()->time(),
+            'hora' => fake()->time('h:s'),
             'horario' => fake()->randomElement(['A', 'B', 'C']),
         ];
     }

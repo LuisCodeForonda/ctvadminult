@@ -42,7 +42,6 @@ class NoticiasComponent extends Component
     public $modal_confirmation = false;
     public $oldImage;
 
-
     public function new()
     {
         $this->modal = true;
@@ -144,6 +143,6 @@ class NoticiasComponent extends Component
 
     public function render()
     {
-        return view('livewire.noticias-component', ['data' => \App\Models\Noticia::paginate($this->paginado), 'categorias' => \App\Models\Categoria::all()]);
+        return view('livewire.noticias-component', ['data' => \App\Models\Noticia::where('titulo', 'LIKE', '%'.$this->search.'%')->paginate($this->paginado), 'categorias' => \App\Models\Categoria::all()]);
     }
 }

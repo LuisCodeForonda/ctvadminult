@@ -49,7 +49,13 @@
                                 {{ $item->hora }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $item->horario }}
+                                @if ($item->horario == 'A')
+                                    Lunes a viernes
+                                @elseif($item->horario == 'B')
+                                    Sabados
+                                @else
+                                    Domingos
+                                @endif
                             </td>
                             <td class="px-6 py-4">
                                 <button type="button" wire:click="edit({{ $item->id }})" class="focus:outline-none font-bold text-blue-600 mr-2 hover:text-blue-700 hover:underline hover:underline-offset-2">Editar</button>
